@@ -1,141 +1,161 @@
 /* Site header */
 .site-header {
-  padding-top: 5px;
-  border-bottom: $hr-line-height solid $accent-color-dark;
-  min-height: $spacing-unit * 1.865;
-  // Positioning context for the mobile navigation icon
-  position: relative;
+    padding-top: 5px;
+    border-bottom: $hr-line-height solid $accent-color-dark;
+    min-height: $spacing-unit * 1.865;
+    // Positioning context for the mobile navigation icon
+    position: relative;
 }
 
 .brand-image {
-  float: left;
-  height: 128px;
+    float: left;
+    height: 128px;
 
 }
 
 .brand-image-border {
-  float:left;
-  overflow: hidden;
-  margin-right: 4px;
-  margin-bottom: 5px;
+    float: left;
+    overflow: hidden;
+    margin-right: 4px;
+    margin-bottom: 5px;
 
-  border: $hr-line-height solid transparent;
-  border-radius: 45%;
-  background-image: linear-gradient(135deg, $accent-h1-lighter, $accent-h4-lighter);
-  background-origin: border-box;
+    border: $hr-line-height solid transparent;
+    border-radius: 45%;
+    background-image: linear-gradient(135deg, $accent-h1-lighter, $accent-h4-lighter);
+    background-origin: border-box;
+}
+
+.header-right-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 130px;
+    justify-content: end;
+    padding-left: 10px;
 }
 
 .site-title {
-  @include relative-font-size(2);
-  font-weight: 300;
-  line-height: $base-line-height * $base-font-size * 2.25;
-  letter-spacing: -1px;
-  margin-bottom: 0px;
-  float: left;
-  position: absolute;
-  bottom: 0;
+    @include relative-font-size(2);
+    font-weight: 300;
+    line-height: $base-line-height * $base-font-size * 2.25;
+    letter-spacing: -1px;
+    // margin-bottom: 0px;
+    flex-grow: 0;
 
-  &,
-  &:visited {
-    color: $accent-color;
-  }
+    // float: left;
+    // position: absolute;
+    // bottom: 0;
+
+    &,
+    &:visited {
+        color: $accent-color;
+    }
+}
+
+.header-quote {
+    margin-bottom: 5px;
+    font-style: italic;
 }
 
 .site-nav {
-  float: right;
-  line-height: $base-line-height * $base-font-size * 2.25;
-  .nav-trigger {
-      display: none;
-  }
-  .menu-icon {
-    display: none;
-  }
-  .page-link {
-    color: $text-color;
-    line-height: $base-line-height;
-    // Gaps between nav items, but not on the last one
-    &:not(:last-child) {
-      margin-right: 20px;
-    }
-  }
+    float: right;
+    line-height: $base-line-height * $base-font-size * 2.25;
 
-  @include media-query($on-palm) {
-    position: absolute;
-    top: 9px;
-    right: 15px; // calc($spacing-unit / 2);
-    background-color: $background-color;
-    border: 1px solid $accent-color-light;
-    border-radius: 5px;
-    text-align: right;
-
-    label[for="nav-trigger"] {
-      display: block;
-      float: right;
-      width: 36px;
-      height: 36px;
-      z-index: 2;
-      cursor: pointer;
+    .nav-trigger {
+        display: none;
     }
 
     .menu-icon {
-      display: block;
-      float: right;
-      width: 36px;
-      height: 26px;
-      line-height: 0;
-      padding-top: 10px;
-      text-align: center;
-
-      > svg {
-        fill: $accent-color;
-      }
-    }
-
-    input ~ .trigger {
-      clear: both;
-      display: none;
-    }
-
-    input:checked ~ .trigger {
-      display: block;
-      padding-bottom: 5px;
+        display: none;
     }
 
     .page-link {
-      display: block;
-      padding: 5px 10px;
+        color: $text-color;
+        line-height: $base-line-height;
 
-      &:not(:last-child) {
-        margin-right: 0;
-      }
-      margin-left: 20px;
+        // Gaps between nav items, but not on the last one
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
     }
-  }
+
+    @include media-query($on-palm) {
+        position: absolute;
+        top: 9px;
+        right: 15px; // calc($spacing-unit / 2);
+        background-color: $background-color;
+        border: 1px solid $accent-color-light;
+        border-radius: 5px;
+        text-align: right;
+
+        label[for="nav-trigger"] {
+            display: block;
+            float: right;
+            width: 36px;
+            height: 36px;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            display: block;
+            float: right;
+            width: 36px;
+            height: 26px;
+            line-height: 0;
+            padding-top: 10px;
+            text-align: center;
+
+            >svg {
+                fill: $accent-color;
+            }
+        }
+
+        input~.trigger {
+            clear: both;
+            display: none;
+        }
+
+        input:checked~.trigger {
+            display: block;
+            padding-bottom: 5px;
+        }
+
+        .page-link {
+            display: block;
+            padding: 5px 10px;
+
+            &:not(:last-child) {
+                margin-right: 0;
+            }
+
+            margin-left: 20px;
+        }
+    }
 }
 
 /* Site footer */
 .site-footer {
-  border-top: $hr-line-height solid $accent-color-dark;
-  // padding: $spacing-unit 0;
-  padding-top: $spacing-unit;
+    border-top: $hr-line-height solid $accent-color-dark;
+    // padding: $spacing-unit 0;
+    padding-top: $spacing-unit;
 }
 
 .footer-heading {
-  @include relative-font-size(1.225);
-  margin-bottom: 15px; // calc($spacing-unit / 2);
-  letter-spacing: -1px;
-  font-weight: 300;
+    @include relative-font-size(1.225);
+    margin-bottom: 15px; // calc($spacing-unit / 2);
+    letter-spacing: -1px;
+    font-weight: 300;
 
-  &,
-  &:visited {
-    color: $accent-color;
-  }
+    &,
+    &:visited {
+        color: $accent-color;
+    }
 }
 
 .contact-list,
 .social-media-list {
-  list-style: none;
-  margin-left: 0;
+    list-style: none;
+    margin-left: 0;
 }
 
 .footer-main {
@@ -146,148 +166,155 @@
 }
 
 .footer-col-wrapper {
-  @include relative-font-size(0.9375);
-  color: $accent-color;
-  flex: none;
-  width: 200px;
-  @extend %clearfix;
+    @include relative-font-size(0.9375);
+    color: $accent-color;
+    flex: none;
+    width: 200px;
+    @extend %clearfix;
 }
 
 .footer-col {
-  margin-top: 6px; // calc($spacing-unit / 5);
-  margin-bottom: 15px; // calc($spacing-unit / 2);
-  padding-left: 15px; // calc($spacing-unit / 2);
-  width: 100%;
+    margin-top: 6px; // calc($spacing-unit / 5);
+    margin-bottom: 15px; // calc($spacing-unit / 2);
+    padding-left: 15px; // calc($spacing-unit / 2);
+    width: 100%;
 }
 
 .footer-col-1 {
-//   width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-//   width:         calc(100% - (#{$spacing-unit} / 2));
-  width: 100%;
+    //   width: -webkit-calc(100% - (#{$spacing-unit} / 2));
+    //   width:         calc(100% - (#{$spacing-unit} / 2));
+    width: 100%;
 }
 
 .footer-col-2 {
-  width:         calc(50% - 15px);
+    width: calc(50% - 15px);
 }
 
 .footer-col-3 {
-  width:         calc(45% - 15px);
+    width: calc(45% - 15px);
 }
 
 @include media-query($on-laptop) {
-  .footer-col-1,
-  .footer-col-2 {
-    // width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-    // width:         calc(50% - (#{$spacing-unit} / 2));
-    width: 100%;
-  }
 
-  .footer-col-3 {
-    width:         calc(100% - 15px);
-  }
+    .footer-col-1,
+    .footer-col-2 {
+        // width: -webkit-calc(50% - (#{$spacing-unit} / 2));
+        // width:         calc(50% - (#{$spacing-unit} / 2));
+        width: 100%;
+    }
+
+    .footer-col-3 {
+        width: calc(100% - 15px);
+    }
 }
 
 @include media-query($on-palm) {
-  .footer-col {
-    float: none;
-    width:         calc(100% - 15px);
-  }
+    .footer-col {
+        float: none;
+        width: calc(100% - 15px);
+    }
 }
 
 /* Page content */
 .page-content {
-  padding: $spacing-unit 0;
-  flex: 1;
+    padding: $spacing-unit 0;
+    flex: 1;
 }
 
 .page-heading {
-  @include relative-font-size(2);
+    @include relative-font-size(2);
 }
 
 .post-list-heading {
-  @include relative-font-size(1.75);
+    @include relative-font-size(1.75);
 }
 
 .post-list {
-  margin-left: 0;
-  list-style: none;
+    margin-left: 0;
+    list-style: none;
 
-  > li {
-    margin-bottom: 45px; // calc($spacing-unit * 1.5);
-  }
+    >li {
+        margin-bottom: 45px; // calc($spacing-unit * 1.5);
+    }
 }
 
 .post-meta {
-  font-size: $small-font-size;
-  color: $accent-color;
+    font-size: $small-font-size;
+    color: $accent-color;
 }
 
 .post-list-header {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .post-link {
-  display: block;
-  @include relative-font-size(1.5);
+    display: block;
+    @include relative-font-size(1.5);
 }
 
 /* Posts */
 .post-header {
-  margin-bottom: $spacing-unit;
+    margin-bottom: $spacing-unit;
 }
 
 .post-title {
-  @include relative-font-size(2.625);
-  letter-spacing: -1px;
-  line-height: 1;
+    @include relative-font-size(2.625);
+    letter-spacing: -1px;
+    line-height: 1;
 
-  @include media-query($on-laptop) {
-    @include relative-font-size(2.25);
-  }
+    @include media-query($on-laptop) {
+        @include relative-font-size(2.25);
+    }
 }
 
 .post-content {
-  margin-bottom: $spacing-unit;
+    margin-bottom: $spacing-unit;
 
-  h1 {
-    @include relative-font-size(2.488);
-    @include media-query($on-laptop) {
-      @include relative-font-size(2);
-    }
-  }
+    h1 {
+        @include relative-font-size(2.488);
 
-  h2 {
-    @include relative-font-size(2.0736);
-    @include media-query($on-laptop) {
-      @include relative-font-size(1.8);
+        @include media-query($on-laptop) {
+            @include relative-font-size(2);
+        }
     }
-  }
 
-  h3 {
-    @include relative-font-size(1.728);
-    @include media-query($on-laptop) {
-      @include relative-font-size(1.4);
-    }
-  }
+    h2 {
+        @include relative-font-size(2.0736);
 
-  h4 {
-    @include relative-font-size(1.44);
-    @include media-query($on-laptop) {
-      @include relative-font-size(1.2);
+        @include media-query($on-laptop) {
+            @include relative-font-size(1.8);
+        }
     }
-  }
 
-  h5 {
-    @include relative-font-size(1.2);
-    @include media-query($on-laptop) {
-      @include relative-font-size(1.125);
-    }
-  }
+    h3 {
+        @include relative-font-size(1.728);
 
-  h6 {
-    @include relative-font-size(1.05);
-    @include media-query($on-laptop) {
-      @include relative-font-size(1.05);
+        @include media-query($on-laptop) {
+            @include relative-font-size(1.4);
+        }
     }
-  }
+
+    h4 {
+        @include relative-font-size(1.44);
+
+        @include media-query($on-laptop) {
+            @include relative-font-size(1.2);
+        }
+    }
+
+    h5 {
+        @include relative-font-size(1.2);
+
+        @include media-query($on-laptop) {
+            @include relative-font-size(1.125);
+        }
+    }
+
+    h6 {
+        @include relative-font-size(1.05);
+
+        @include media-query($on-laptop) {
+            @include relative-font-size(1.05);
+        }
+    }
 }

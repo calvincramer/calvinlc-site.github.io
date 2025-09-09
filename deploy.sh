@@ -2,6 +2,9 @@
 
 set -xue
 
+echo "Old, use github pages now"
+exit 1
+
 HOST=chi211.greengeeks.net
 
 if ps aww -o command | grep "jekyll serve" | grep -vq "grep"; then
