@@ -181,9 +181,13 @@ For `<col>` use fancy CSS to style the column: `#myTable>div:nth-child(9n+2)`. 9
 `<caption>` is a really cool element! It takes the same width of the table but is **outside** the table border and **inside** the table margin. We can use `<div><div class="fake-caption">...</div><table>...</table></div>` instead. Note that CSS `::before` is inside the margin so is not a replacement.
 
 ## Custom HTML elements
-TODO
+Custom elements allow us to make new HTML tags and define the styling ourselves, such as `<my-big-blinking-text>`. We are not limited to the official HTML tags.
+
+Custom elements, specifically *undefined custom elements* (no Javascript), enable converting our `<div class="my-fake-em">` to `<my-fake-em>`. Styling custom elements is the same as styling normal HTML elements.
 
 ## See For Yourself
+Here's an example where everything on the left is the official HTML element, and everything on the right is a replicated version using custom HTML elements and CSS.
+
 TODO
 - [ ] Page of side-by-side HTML elements themselves and equivalent in `<div>`
 
