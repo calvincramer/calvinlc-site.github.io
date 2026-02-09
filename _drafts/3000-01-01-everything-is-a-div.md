@@ -40,6 +40,8 @@ Here's the whole list: `<address>`,  `<article>`,  `<aside>`,  `<footer>`,  `<he
 
 That's 10 elements!
 
+Also `<address>` has a default style of italic.
+
 ## `<span>` and friends
 
 I chose `<div>` as the base element but could have easily chose `<span>` instead. The only difference is block vs inline. Put a `display: block` on a `<span>` and now it's a `<div>`.
@@ -226,7 +228,7 @@ TODO
         - `<sub>` - `vertical-align: sub` and `font-size: smaller`
         - `<sup>` - `vertical-align: super` and `font-size: smaller`
         - `<var>` - `font-style: italic`
-        - `<abbr>` - `text-decoration: dotted underline`
+        - `<abbr>` - `text-decoration: dotted underline`. Use global attribute `title`.
         - `<cite>` - `font-style: italic`
         - `<dfn>` - `font-style: italic`
         - `<kbd>` - `font-family: monospace`
