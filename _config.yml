@@ -28,9 +28,9 @@ title: Calvin Lei-Cramer
 site.author: Calvin Lei-Cramer
 email: calvincramer at gmail
 description: >-
-  Calvin does things
+    Calvin does things
 #twitter_username: jekyllrb
-github_username:  calvincramer
+github_username: calvincramer
 linkedin_username: calvincramer
 
 show_excerpts: true
@@ -48,7 +48,6 @@ compress_html:
         envs: [local]
     blanklines: false
     profile: false
-
 
 # Build settings
 # theme: minima
@@ -69,3 +68,6 @@ exclude:
     - .jekyll-cache/
     - Gemfile
     - Gemfile.lock
+
+include:
+    - _pages

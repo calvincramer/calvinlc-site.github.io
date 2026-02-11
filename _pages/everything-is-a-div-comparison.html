@@ -1,0 +1,698 @@
+---
+layout: default
+permalink: /random/everything-is-a-div-comparison
+title: Everything Is a Div Comparison
+---
+
+<!-- Isolate from Jekyll CSS using shadow DOM -->
+
+<div id="host-element"></div>
+
+<script>
+    const host = document.getElementById('host-element');
+    const shadowRoot = host.attachShadow({ mode: 'open' });
+
+    shadowRoot.innerHTML = `
+    <style>
+    :host {
+        --bg1: rgba(81, 37, 45, 0.7);
+        --bg2: rgba(37, 107, 103, 0.35);
+    }
+
+    .main {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+
+    }
+
+    .section {
+        padding: 4px;
+        min-width: 0;
+    }
+
+    .title {
+        font-weight: bold;
+        font-size: 1.25rem;
+        text-decoration: underline;
+        text-align: center;
+        margin-block: 1em !important;
+    }
+
+    .fake-article,
+    .fake-aside,
+    .fake-footer,
+    .fake-header,
+    .fake-hgroup,
+    .fake-main,
+    .fake-nav,
+    .fake-search,
+    .fake-section {
+        /* empty, just a div. */
+        /* this is just to keep empty rule warning silent: */
+        display: block;
+    }
+
+    .fake-p {
+        margin-block: 1em;
+    }
+
+    .fake-address {
+        font-style: italic;
+    }
+
+    .fake-h1 {
+        font-size: 2em;
+        font-weight: bold;
+        margin-block: 0.67em;
+    }
+
+    .fake-h2 {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-block: 0.83em;
+    }
+
+    .fake-h3 {
+        font-size: 1.17em;
+        font-weight: bold;
+        margin-block: 1em;
+    }
+
+    .fake-h4 {
+        font-size: 1em;
+        font-weight: bold;
+        margin-block: 1.33em;
+    }
+
+    .fake-h5 {
+        font-size: 0.83em;
+        font-weight: bold;
+        margin-block: 1.67em;
+    }
+
+    .fake-h6 {
+        font-size: 0.67em;
+        font-weight: bold;
+        margin-block: 2.33em;
+    }
+
+    .fake-span,
+    .fake-br,
+    .fake-q,
+    .fake-i,
+    .fake-em,
+    .fake-b,
+    .fake-strong,
+    .fake-u,
+    .fake-ins,
+    .fake-del,
+    .fake-s,
+    .fake-mark,
+    .fake-code,
+    .fake-small,
+    .fake-sub,
+    .fake-sup,
+    .fake-var,
+    .fake-abbr,
+    .fake-cite,
+    .fake-dfn,
+    .fake-kbd,
+    .fake-samp,
+    .fake-data,
+    .fake-time,
+    .fake-output,
+    .fake-bdi,
+    .fake-bdo {
+        display: inline;
+    }
+
+    .fake-i,
+    .fake-em,
+    .fake-var,
+    .fake-cite,
+    .fake-dfn {
+        font-style: italic;
+    }
+
+    .fake-b,
+    .fake-strong {
+        font-weight: bolder;
+    }
+
+    .fake-u,
+    .fake-ins {
+        text-decoration: underline;
+    }
+
+    .fake-br::after {
+        content: "\\A";
+        white-space: pre;
+    }
+
+    .fake-del,
+    .fake-s {
+        text-decoration: line-through;
+    }
+
+    .fake-mark {
+        background: Mark;
+        color: MarkText;
+    }
+
+    .fake-code,
+    .fake-kbd,
+    .fake-samp,
+    .fake-pre {
+        font-family: monospace;
+    }
+
+    .fake-q::before {
+        content: open-quote;
+    }
+
+    .fake-q::after {
+        content: close-quote;
+    }
+
+    .fake-small {
+        font-size: smaller;
+    }
+
+    .fake-sub {
+        vertical-align: sub;
+        font-size: smaller;
+    }
+
+    .fake-sup {
+        vertical-align: super;
+        font-size: smaller;
+    }
+
+    .fake-abbr[title] {
+        text-decoration: dotted underline;
+    }
+
+    .fake-pre {
+        white-space: pre;
+        margin-block: 1em;
+    }
+
+    .fake-blockquote {
+        margin-block: 1em;
+        margin-inline: 40px;
+    }
+
+    .fake-output,
+    .fake-bdi,
+    .fake-ruby,
+    .fake-rt,
+    .fake-ol,
+    .fake-li,
+    .fake-dl,
+    .fake-dt,
+    .fake-dd,
+    .fake-figure,
+    .fake-figcaption,
+    .fake-table,
+    .fake-thead,
+    .fake-tbody,
+    .fake-tfoot,
+    .fake-tr,
+    .fake-th,
+    .fake-td {
+        unicode-bidi: isolate;
+    }
+
+    .fake-bdo {
+        unicode-bidi: isolate-override;
+    }
+
+    .fake-ruby {
+        display: ruby;
+    }
+
+    .fake-rt {
+        display: ruby-text;
+        white-space: nowrap;
+        font-size: 50%;
+        line-height: 1;
+        text-emphasis: none;
+    }
+
+    .fake-hr {
+        color: gray;
+        border-width: 1px;
+        border-style: inset;
+        margin-block: 0.5em;
+        margin-inline: auto;
+        overflow: hidden;
+    }
+
+    .fake-ol {
+        list-style-type: decimal;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        padding-inline-start: 40px;
+        counter-reset: list-item;
+    }
+
+    .fake-li {
+        display: list-item;
+        text-align: match-parent;
+    }
+
+    .fake-ul,
+    .fake-menu {
+        list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        padding-inline-start: 40px;
+        counter-reset: list-item;
+    }
+
+    .fake-dl {
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+    }
+
+    .fake-dd {
+        margin-inline-start: 40px;
+    }
+
+    .fake-figure {
+        margin-block: 1em;
+        margin-inline: 40px;
+    }
+
+    .fake-table {
+        display: table;
+        border-spacing: 2px;
+        border-collapse: separate;
+        box-sizing: border-box;
+        text-indent: 0;
+    }
+
+    .fake-thead {
+        display: table-header-group;
+        vertical-align: middle;
+    }
+
+    .fake-tbody {
+        display: table-row-group;
+        vertical-align: middle;
+    }
+
+    .fake-tfoot {
+        display: table-footer-group;
+        vertical-align: middle;
+    }
+
+    .fake-tr {
+        display: table-row;
+        vertical-align: inherit;
+    }
+
+    .fake-th {
+        display: table-cell;
+        vertical-align: inherit;
+        font-weight: bold;
+        padding: 1px;
+        text-align: center;
+    }
+
+    .fake-td {
+        display: table-cell;
+        vertical-align: inherit;
+        text-align: unset;
+        padding: 1px;
+    }
+</style>
+<div class="main">
+    <div class="section" id="left">
+        <p class="title">Real HTML elements</p>
+        <div style="background-color: var(--bg1);">I am a &lt;div&gt;</div>
+        <address style="background-color: var(--bg2);">I am an &lt;address&gt;</address>
+        <article style="background-color: var(--bg1);">I am an &lt;article&gt;</article>
+        <aside style="background-color: var(--bg2);">I am an &lt;aside&gt;</aside>
+        <footer style="background-color: var(--bg1);">I am a &lt;footer&gt;</footer>
+        <header style="background-color: var(--bg2);">I am a &lt;header&gt;</header>
+        <hgroup style="background-color: var(--bg1);">I am a &lt;hgroup&gt;</hgroup>
+        <main style="background-color: var(--bg2);">I am a &lt;main&gt;</main>
+        <nav style="background-color: var(--bg1);">I am a &lt;nav&gt;</nav>
+        <search style="background-color: var(--bg2);">I am a &lt;search&gt;</search>
+        <section style="background-color: var(--bg1);">I am a &lt;section&gt;</section>
+        <h1 style="background-color: var(--bg2);">I am a &lt;h1&gt;</h1>
+        <h2 style="background-color: var(--bg1);">I am a &lt;h2&gt;</h2>
+        <h3 style="background-color: var(--bg2);">I am a &lt;h3&gt;</h3>
+        <h4 style="background-color: var(--bg1);">I am a &lt;h4&gt;</h4>
+        <h5 style="background-color: var(--bg2);">I am a &lt;h5&gt;</h5>
+        <h6 style="background-color: var(--bg1);">I am a &lt;h6&gt;</h6>
+        <p>
+            <span style="background-color: var(--bg2);">(&lt;p&gt;)</span>You <span
+                style="background-color: var(--bg1);">(&lt;span&gt;) have done that
+                you</span> should be sorry
+            for.
+            There <i style="background-color: var(--bg2);">(&lt;i&gt;) is no terror</i>, Cassius, in your threats,
+            For I am arm'd so <em style="background-color: var(--bg1);">(&lt;em&gt;) strong in honesty</em>
+            That they pass by me as the <b style="background-color: var(--bg2);">(&lt;b&gt;) idle wind</b>,
+            Which I <strong style="background-color: var(--bg1);">(&lt;strong&gt;) respect not</strong>. I did send
+            to you
+            For certain <u style="background-color: var(--bg2);">(&lt;u&gt;) sums of gold</u>, which you denied
+            me: <span style="background-color: var(--bg1);">(&lt;br&gt;)</span><br>
+            For I can raise <del style="background-color: var(--bg2);">(&lt;del&gt;) no money</del> by vile means:
+            By heaven, I had rather <ins style="background-color: var(--bg1);">(&lt;ins&gt;) coin my heart</ins>,
+            And drop my blood for <s style="background-color: var(--bg2);">(&lt;s&gt;) drachmas</s>, than to wring
+            From the <mark>(&lt;mark&gt;) hard hands of peasants</mark> their
+            vile trash
+            By any <code style="background-color: var(--bg1);">(&lt;code&gt;) indirection</code> I did send
+            To you for gold to pay <q style="background-color: var(--bg2);">(&lt;q&gt;) my legions</q>,
+            Which you denied me: was <small style="background-color: var(--bg1);">(&lt;small&gt;) that done like
+                Cassius</small>?
+            Should I have answer'd <sub style="background-color: var(--bg2);">(&lt;sub&gt;) Caius</sub> Cassius <sup
+                style="background-color: var(--bg1);">(&lt;sup&gt;) so</sup>?
+            When <var style="background-color: var(--bg2);">(&lt;var&gt;) Marcus Brutus</var> grows so covetous, To
+            lock such rascal counters from his friends, Be ready, <abbr title="tooltip!"
+                style="background-color: var(--bg1);">(&lt;abbr&gt;) gods</abbr>, with all your thunderbolts; Dash
+            him
+            to pieces!
+            <cite style="background-color: var(--bg2);">(&lt;cite&gt;) I denied you not</cite>.
+            You did.
+            I did not: he was but a <dfn style="background-color: var(--bg1);">(&lt;dfn&gt;) fool</dfn> that brought
+            My answer back. Brutus hath <kbd style="background-color: var(--bg2);">(&lt;kbd&gt;) rived my
+                heart</kbd>
+            A friend should bear his <samp style="background-color: var(--bg1);">(&lt;samp&gt;) friend's
+                infirmities</samp>,
+            But Brutus makes mine greater than they are.
+        </p>
+        <pre style="background-color: var(--bg2); text-wrap: wrap">(&lt;pre&gt;) I do not, till you practise them on me.</pre>
+        <blockquote style="background-color: var(--bg1);">(&lt;blockquote&gt;) You love me not.</blockquote>
+        <p>I do <data style="background-color: var(--bg2);">(&lt;data&gt;) not</data> like your <time
+                style="background-color: var(--bg1);">(&lt;time&gt;) faults</time>.</p>
+        <p>A friendly eye <output style="background-color: var(--bg2);">(&lt;output&gt;) could never see</output>
+            such faults.</p>
+        <p>
+            <span style="background-color: var(--bg1);">(Many &lt;wbr&gt; here)</span> A
+            flat<wbr>terer's wo<wbr>uld not, tho<wbr>ugh th<wbr>ey do
+                app<wbr>ear
+                As hu<wbr>ge as hi<wbr>gh Oly<wbr>mpus.
+        </p>
+        <p><bdi style="background-color: var(--bg2)">ברק כהן (&lt;bdi&gt;)</bdi> - 24 years old. My favorite sport
+            is golf.</p>
+        <p>
+            Come, Antony, and young Octavius, come,
+            Revenge
+            <bdo dir="rtl" style="background-color: var(--bg1);">(&lt;bdo&gt;) yourselves alone</bdo> on Cassius,
+            For Cassius is aweary of the world;
+            <ruby style="background-color: var(--bg2);">(&lt;ruby&gt;) 明日<rt style="background-color: var(--bg1);">
+                    (&lt;rt&gt;) Ashita</rt>
+            </ruby>
+        </p>
+        <div style="background-color: var(--bg1);">
+            <span>&lt;hr&gt;</span>
+            <hr>
+        </div>
+        <div style="background-color: var(--bg2);">
+            <span>&lt;ol&gt; and &lt;li&gt;</span>
+            <ol>
+                <li>One</li>
+                <li>Two</li>
+                <li value="999">Boom!</li>
+            </ol>
+        </div>
+        <div style="background-color: var(--bg1);">
+            <span>&lt;ul&gt; and &lt;li&gt;</span>
+            <ul>
+                <li>One</li>
+                <li>Two</li>
+                <li>No boom</li>
+            </ul>
+        </div>
+        <div style="background-color: var(--bg2);">
+            <span>&lt;menu&gt;</span>
+            <menu>
+                <li>One</li>
+                <li>Two</li>
+                <li>No boom</li>
+            </menu>
+        </div>
+        <div style="background-color: var(--bg1);">
+            <span>&lt;dl&gt;, &lt;dt&gt;, &lt;dd&gt;</span>
+            <dl>
+                <dt>Beast of Bodmin</dt>
+                <dd>A large feline inhabiting Bodmin Moor.</dd>
+
+                <dt>Morgawr</dt>
+                <dd>A sea serpent.</dd>
+
+                <dt>Owlman</dt>
+                <dd>A giant owl-like creature.</dd>
+            </dl>
+        </div>
+        <figure style="background-color: var(--bg2);">
+            <p>&lt;figure&gt;</p>
+            <figcaption style="background-color: var(--bg1);">&lt;figcaption&gt;</figcaption>
+        </figure>
+
+        <div style="background-color: var(--bg2);">
+            <p>&lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;, &lt;tr&gt;, &lt;th&gt;, &lt;td&gt;</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Person</th>
+                        <th>Most interest in</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Chris</th>
+                        <td>HTML tables</td>
+                        <td>22</td>
+                    </tr>
+                    <tr>
+                        <th>Dennis</th>
+                        <td>Web accessibility</td>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <th>Sarah</th>
+                        <td>JavaScript frameworks</td>
+                        <td>29</td>
+                    </tr>
+                    <tr>
+                        <th>Karen</th>
+                        <td>Web performance</td>
+                        <td>36</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <th>Average age</th>
+                        <td>33</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div class="section" id="right">
+        <div class="title fake-p">Fake HTML elements</div>
+        <div style="background-color: var(--bg1);">I am a &lt;div&gt;</div>
+        <div class="fake-address" style="background-color: var(--bg2);">I am an &lt;address&gt;</div>
+        <div class="fake-article" style="background-color: var(--bg1);">I am an &lt;article&gt;</div>
+        <div class="fake-aside" style="background-color: var(--bg2);">I am an &lt;aside&gt;</div>
+        <div class="fake-footer" style="background-color: var(--bg1);">I am a &lt;footer&gt;</div>
+        <div class="fake-header" style="background-color: var(--bg2);">I am a &lt;header&gt;</div>
+        <div class="fake-hgroup" style="background-color: var(--bg1);">I am a &lt;hgroup&gt;</div>
+        <div class="fake-main" style="background-color: var(--bg2);">I am a &lt;main&gt;</div>
+        <div class="fake-nav" style="background-color: var(--bg1);">I am a &lt;nav&gt;</div>
+        <div class="fake-search" style="background-color: var(--bg2);">I am a &lt;search&gt;</div>
+        <div class="fake-section" style="background-color: var(--bg1);">I am a &lt;section&gt;</div>
+        <div class="fake-h1" style="background-color: var(--bg2);">I am a &lt;h1&gt;</div>
+        <div class="fake-h2" style="background-color: var(--bg1);">I am a &lt;h2&gt;</div>
+        <div class="fake-h3" style="background-color: var(--bg2);">I am a &lt;h3&gt;</div>
+        <div class="fake-h4" style="background-color: var(--bg1);">I am a &lt;h4&gt;</div>
+        <div class="fake-h5" style="background-color: var(--bg2);">I am a &lt;h5&gt;</div>
+        <div class="fake-h6" style="background-color: var(--bg1);">I am a &lt;h6&gt;</div>
+        <div class="fake-p">
+            <div class="fake-span" style="background-color: var(--bg2);">(&lt;p&gt;)</div>You <div class="fake-span"
+                style="background-color: var(--bg1);">(&lt;span&gt;) have done that
+                you</div> should be sorry
+            for.
+            There <div class="fake-i" style="background-color: var(--bg2);">(&lt;i&gt;) is no terror</div>,
+            Cassius, in your threats,
+            For I am arm'd so <div class="fake-em" style="background-color: var(--bg1);">(&lt;em&gt;) strong
+                in honesty</div>
+            That they pass by me as the <div class="fake-b" style="background-color: var(--bg2);">(&lt;b&gt;)
+                idle wind</div>,
+            Which I <div class="fake-strong" style="background-color: var(--bg1);">(&lt;strong&gt;) respect
+                not</div>. I did send
+            to you
+            For certain <div class="fake-u" style="background-color: var(--bg2);">(&lt;u&gt;) sums of
+                gold</div>, which you denied
+            me: <div class="fake-span" style="background-color: var(--bg1);">(&lt;br&gt;)</div>
+            <div class="fake-br"></div>For I can raise <div class="fake-del" style="background-color: var(--bg2);">
+                (&lt;del&gt;) no
+                money</div> by vile means:
+            By heaven, I had rather <div class="fake-ins" style="background-color: var(--bg1);">(&lt;ins&gt;)
+                coin my heart</div>,
+            And drop my blood for <div class="fake-s" style="background-color: var(--bg2);">(&lt;s&gt;)
+                drachmas</div>, than to wring
+            From the <div class="fake-mark">(&lt;mark&gt;) hard hands of peasants</div> their
+            vile trash
+            By any <div class="fake-code" style="background-color: var(--bg1);">(&lt;code&gt;) indirection</div> I
+            did send
+            To you for gold to pay <div class="fake-q" style="background-color: var(--bg2);">(&lt;q&gt;) my
+                legions</div>,
+            Which you denied me: was <div class="fake-small" style="background-color: var(--bg1);">(&lt;small&gt;)
+                that done like
+                Cassius</div>?
+            Should I have answer'd <div class="fake-sub" style="background-color: var(--bg2);">(&lt;sub&gt;)
+                Caius</div> Cassius <div class="fake-sup" style="background-color: var(--bg1);">(&lt;sup&gt;)
+                so</div>?
+            When <div class="fake-var" style="background-color: var(--bg2);">(&lt;var&gt;) Marcus
+                Brutus</div> grows so covetous, To
+            lock such rascal counters from his friends, Be ready, <div class="fake-abbr" title="tooltip!"
+                style="background-color: var(--bg1);">(&lt;abbr&gt;) gods</div>, with all
+            your thunderbolts; Dash
+            him
+            to pieces!
+            <div class="fake-cite" style="background-color: var(--bg2);">(&lt;cite&gt;) I denied you
+                not</div>.
+            You did.
+            I did not: he was but a <div class="fake-dfn" style="background-color: var(--bg1);">(&lt;dfn&gt;)
+                fool</div> that brought
+            My answer back. Brutus hath <div class="fake-kbd" style="background-color: var(--bg2);">(&lt;kbd&gt;)
+                rived my
+                heart</div>
+            A friend should bear his <div class="fake-samp" style="background-color: var(--bg1);">(&lt;samp&gt;)
+                friend's
+                infirmities</div>,
+            But Brutus makes mine greater than they are.
+        </div>
+        <div class="fake-pre" style="background-color: var(--bg2); text-wrap: wrap">(&lt;pre&gt;) I do not, till you practise them on me.</div>
+        <div class="fake-blockquote" style="background-color: var(--bg1);">(&lt;blockquote&gt;) You love me not.
+        </div>
+        <div class="fake-p">I do <div class="fake-data" style="background-color: var(--bg2);">(&lt;data&gt;) not
+            </div> like
+            your <div class="fake-time" style="background-color: var(--bg1);">(&lt;time&gt;) faults</div>.
+        </div>
+        <div class="fake-p">A friendly eye <div class="fake-output" style="background-color: var(--bg2);">
+                (&lt;output&gt;)
+                could never see</div>
+            such faults.</div>
+        <div class="fake-p">
+            <div class="fake-span" style="background-color: var(--bg1);">(Many &lt;wbr&gt; here)</div> A
+            flat&ZeroWidthSpace;terer's wo&ZeroWidthSpace;uld not, tho&ZeroWidthSpace;ugh th&ZeroWidthSpace;ey do
+            app&ZeroWidthSpace;ear
+            As hu&ZeroWidthSpace;ge as hi&ZeroWidthSpace;gh Oly&ZeroWidthSpace;mpus.
+        </div>
+        <div class="fake-p">
+            <div class="fake-bdi" style="background-color: var(--bg2)">ברק כהן (&lt;bdi&gt;)</div> - 24 years old.
+            My favorite sport is golf.
+        </div>
+        <div class="fake-p">
+            Come, Antony, and young Octavius, come, Revenge
+            <div class="fake-bdo" dir="rtl" style="background-color: var(--bg1);">(&lt;bdo&gt;) yourselves alone
+            </div> on Cassius,
+            For Cassius is aweary of the world;
+            <div class="fake-ruby" style="background-color: var(--bg2);">(&lt;ruby&gt;) 明日<div class="fake-rt"
+                    style="background-color: var(--bg1);">
+                    (&lt;rt&gt;) Ashita</div>
+            </div>
+        </div>
+        <div style="background-color: var(--bg1);">
+            <div class="fake-span">&lt;hr&gt;</div>
+            <div class="fake-hr"></div>
+        </div>
+        <div style="background-color: var(--bg2);">
+            <div class="fake-span">&lt;ol&gt; and &lt;li&gt;</div>
+            <div class="fake-ol">
+                <div class="fake-li">One</div>
+                <div class="fake-li">Two</div>
+                <div class="fake-li" style="counter-set: list-item 999">Boom!</div>
+            </div>
+        </div>
+        <div style="background-color: var(--bg1);">
+            <div class="fake-span">&lt;ul&gt; and &lt;li&gt;</div>
+            <div class="fake-ul">
+                <div class="fake-li">One</div>
+                <div class="fake-li">Two</div>
+                <div class="fake-li">No boom</div>
+            </div>
+        </div>
+        <div style="background-color: var(--bg2);">
+            <div class="fake-span">&lt;menu&gt;</div>
+            <div class="fake-menu">
+                <div class="fake-li">One</div>
+                <div class="fake-li">Two</div>
+                <div class="fake-li">No boom</div>
+            </div>
+        </div>
+        <div style="background-color: var(--bg1);">
+            <div class="fake-span">&lt;dl&gt;, &lt;dt&gt;, &lt;dd&gt;</div>
+            <div class="fake-dl">
+                <div class="fake-dt">Beast of Bodmin</div>
+                <div class="fake-dd">A large feline inhabiting Bodmin Moor.</div>
+
+                <div class="fake-dt">Morgawr</div>
+                <div class="fake-dd">A sea serpent.</div>
+
+                <div class="fake-dt">Owlman</div>
+                <div class="fake-dd">A giant owl-like creature.</div>
+            </div>
+        </div>
+        <div class="fake-figure" style="background-color: var(--bg2);">
+            <div class="fake-p">&lt;figure&gt;</div>
+            <div class="fake-figcaption" style="background-color: var(--bg1);">&lt;figcaption&gt;
+            </div>
+        </div>
+
+        <div style="background-color: var(--bg2);">
+            <div class="fake-p">&lt;table&gt;, &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;, &lt;tr&gt;,
+                &lt;th&gt;, &lt;td&gt;</div>
+            <div class="fake-table">
+                <div class="fake-thead">
+                    <div class="fake-tr">
+                        <div class="fake-th">Person</div>
+                        <div class="fake-th">Most interest in</div>
+                        <div class="fake-th">Age</div>
+                    </div>
+                </div>
+                <div class="fake-tbody">
+                    <div class="fake-tr">
+                        <div class="fake-th">Chris</div>
+                        <div class="fake-td">HTML tables</div>
+                        <div class="fake-td">22</div>
+                    </div>
+                    <div class="fake-tr">
+                        <div class="fake-th">Dennis</div>
+                        <div class="fake-td">Web accessibility</div>
+                        <div class="fake-td">45</div>
+                    </div>
+                    <div class="fake-tr">
+                        <div class="fake-th">Sarah</div>
+                        <div class="fake-td">JavaScript frameworks</div>
+                        <div class="fake-td">29</div>
+                    </div>
+                    <div class="fake-tr">
+                        <div class="fake-th">Karen</div>
+                        <div class="fake-td">Web performance</div>
+                        <div class="fake-td">36</div>
+                    </div>
+                </div>
+                <div class="fake-tfoot">
+                    <div class="fake-tr">
+                        <div class="fake-td"></div>
+                        <div class="fake-th">Average age</div>
+                        <div class="fake-td">33</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  `;
+</script>
